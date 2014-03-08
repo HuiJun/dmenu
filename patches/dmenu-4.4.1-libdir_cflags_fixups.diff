@@ -1,0 +1,25 @@
+--- config.mk	2011-12-12 11:33:44.875000011 -0800
++++ config.mk	2011-12-12 11:35:44.778000011 -0800
+@@ -4,6 +4,7 @@ VERSION = 4.4.1
+ # paths
+ PREFIX = /usr/local
+ MANPREFIX = ${PREFIX}/share/man
++LIBDIR = /usr/local/lib
+ 
+ X11INC = /usr/X11R6/include
+ X11LIB = /usr/X11R6/lib
+@@ -14,11 +15,12 @@ XINERAMAFLAGS = -DXINERAMA
+ 
+ # includes and libs
+ INCS = -I${X11INC}
+-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS}
++LIBS = -L${LIBDIR} -L${X11LIB} -lX11 ${XINERAMALIBS}
+ 
+ # flags
++OPTS ?= -0s
+ CPPFLAGS = -D_BSD_SOURCE -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+-CFLAGS   = -ansi -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
++CFLAGS   = -ansi -pedantic -Wall ${OPTS} ${INCS} ${CPPFLAGS}
+ LDFLAGS  = -s ${LIBS}
+ 
+ # compiler and linker
